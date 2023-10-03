@@ -98,41 +98,33 @@ const App = () => {
         }
       }}
       
-    else {
-      // Henkilöä ei ole vielä olemassa
-        if (!newName || !newNumber) {
-          console.log("kissa")
-          setErrorMessage(
-            "kissa"
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 3000)
-        }
-
-      setPersons(persons.concat(newPerson));
-      personService.addPerson(newPerson)
-
+   else {
+    if (!newName || !newNumber) {
+      setErrorMessage("Name and number are required");
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 3000);
+    } else {
+      personService
+        .addPerson(newPerson)
         .then((data) => {
           setPersons(persons.concat(data));
-          setSuccessMessage (
-            `${newName} added successfully`
-          )
+          setSuccessMessage(`${newName} added successfully`);
           setTimeout(() => {
-            setSuccessMessage(null)
-          }, 3000)
+            setSuccessMessage(null);
+          }, 3000);
           setNewName('');
           setNewNumber('');
-          })
-
-        .catch((error) => {
-          setErrorMessage(`The person could not be added`)
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 3000)
         })
-    } 
-  }; // Lopettaa Add Person aliohjelman
+        .catch((error) => {
+          setErrorMessage("The person could not be added");
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 3000);
+        });
+    }
+  }
+};
 
   const filteredPersons = persons.filter(person =>
     person.name.toLowerCase().includes(searchTerm.toLowerCase()))
