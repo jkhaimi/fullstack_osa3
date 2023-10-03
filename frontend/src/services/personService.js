@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = 'https://fullstack-osa3-01ig.onrender.com/api/persons';
+const baseUrl = '/api/persons';
 
 const getPersons = () => {
     return axios.get(baseUrl).then(response => response.data);

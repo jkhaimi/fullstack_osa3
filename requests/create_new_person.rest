@@ -1,4 +1,4 @@
-POST https://render-test-xx2d.onrender.com/api/persons
+POST https://fullstack-osa3-01ig.onrender.com/api/persons
 Content-Type: application/json
 
 {
