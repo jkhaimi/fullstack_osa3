@@ -125,14 +125,6 @@ app.post('/api/persons', (req, res) => {
   console.log(person)
 })
 
-// Serve the frontend build files from the 'build' directory
-app.use(express.static(path.join(__dirname, 'build')));
-
-// Serve the frontend HTML file for all other requests
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
