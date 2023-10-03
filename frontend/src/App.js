@@ -98,9 +98,18 @@ const App = () => {
         }
       }}
       
-    
     else {
       // Henkilöä ei ole vielä olemassa
+        if (!newName || !newNumber) {
+          console.log("kissa")
+          setErrorMessage(
+            "kissa"
+          )
+          setTimeout(() => {
+            setErrorMessage(null)
+          }, 3000)
+        }
+
       setPersons(persons.concat(newPerson));
       personService.addPerson(newPerson)
 
