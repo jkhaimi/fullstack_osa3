@@ -1,8 +1,7 @@
-# POST https://fullstack-osa3-01ig.onrender.com/api/persons
 POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-    "name": "Mirri",
-    "number": "123" 
+    "name": "Juuso",
+    "number": ""
 }
