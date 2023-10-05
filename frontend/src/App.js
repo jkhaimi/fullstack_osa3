@@ -119,9 +119,11 @@ const App = () => {
           setNewNumber('');
         })
         .catch((error) => {
-          if (error.response && error.response.data && error.response.data.message) {
+          if (error.response || error.response.data || error.response.data.message) {
             setErrorMessage(error.response.data.message);
+            console.log("kissa")
           } else {
+            console.log("mau")
             setErrorMessage("An error occurred while processing your request.");
           }
           setTimeout(() => {
