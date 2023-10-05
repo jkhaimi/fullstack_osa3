@@ -23,4 +23,6 @@ const updatePerson = (id, updatedPerson) => {
     })
 }
 
-export default { getPersons, addPerson, deletePerson, updatePerson };
+const personService = { getPersons, addPerson, deletePerson, updatePerson };
+
+export default personService;

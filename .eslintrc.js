@@ -1,39 +1,39 @@
 module.exports = {
   'env': {
-	  'browser': true,
-	  'commonjs': true,
-	  'es2021': true,
-	  'node': true
+    'browser': true,
+    'commonjs': true,
+    'es2021': true,
+    'node': true
   },
   'extends': [
     'eslint:recommended',
     'plugin:react/recommended'
   ],
   'overrides': [
-	  {
+    {
       'env': {
-		  'node': true
+        'node': true
       },
       'files': [
-		  '.eslintrc.{js,cjs}'
+        '.eslintrc.{js,cjs}'
       ],
       'parserOptions': {
-		  'sourceType': 'script'
+        'sourceType': 'script'
       }
-	  }
+    }
   ],
   'parserOptions': {
-	  'ecmaVersion': 'latest'
+    'ecmaVersion': 'latest'
   },
   'plugins': [
-	  'react'
+    'react'
   ],
   'rules': {
-	  'indent': [
+    'indent': [
       'error',
       2,
-	  ],
-	  'linebreak-style': [
+    ],
+    'linebreak-style': [
       'error',
       'unix'
     ],
