@@ -23,12 +23,15 @@ mongoose.connect(url)
     number: {
       type: String, 
       required: true,
+      minlength: 8,
       validate: {
         validator: function (value) {
-
-          return /^[0-9]{2,3}-[0-9]+$/.test(value); 
+      
+          const regex = /^(?:\d{2,3}-\d+)$/;
+  
+          return regex.test(value) && value.length >= 8;
         },
-        message: 'Puhelinnumero ei ole oikeassa muodossa',
+        message: 'Invalid number format. It must be in the format of XX-XXXXXXXX or XXX-XXXXXXXX.',
       },
     },
   });
