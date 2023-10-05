@@ -120,8 +120,12 @@ const App = () => {
         })
         .catch((error) => {
           if (error.response || error.response.data || error.response.data.message) {
-            setErrorMessage(error.response.message);
+            setErrorMessage(error.response.data);
             console.log("kissa")
+            console.log(error.response)
+            console.log(error.response.data)
+            console.log(error.response.message)
+            
           } else {
             console.log("mau")
             setErrorMessage("An error occurred while processing your request.");
