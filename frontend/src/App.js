@@ -120,7 +120,6 @@ const App = () => {
           setNewNumber('');
         })
         .catch((error) => {
-          console.log(error.response.data)
           setErrorMessage(error.response.data);
           setTimeout(() => {
             setErrorMessage(null);
