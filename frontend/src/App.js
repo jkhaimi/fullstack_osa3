@@ -120,7 +120,7 @@ const App = () => {
         })
         .catch(error => {
           console.log(error.response.data.message)
-          setErrorMessage(`${error.response.data}`);
+          setErrorMessage(`${error.response.data.message}`);
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
