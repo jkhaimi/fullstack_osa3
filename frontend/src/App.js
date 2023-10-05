@@ -118,8 +118,8 @@ const App = () => {
           setNewName('');
           setNewNumber('');
         })
-        .catch((error) => {
-          console.log(error.response.data)
+        .catch(error => {
+          console.log(error.response.data.message)
           setErrorMessage(`${error.response.data}`);
           setTimeout(() => {
             setErrorMessage(null);
