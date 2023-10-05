@@ -120,7 +120,7 @@ const App = () => {
         })
         .catch((error) => {
           if (error.response || error.response.data || error.response.data.message) {
-            setErrorMessage(error.response.data.message);
+            setErrorMessage(error.response);
             console.log("kissa")
           } else {
             console.log("mau")
