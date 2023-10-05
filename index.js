@@ -7,6 +7,9 @@ app.use(morgan('tiny'))
 app.use(cors())
 app.use(express.static('build'))
 
+require('dotenv').config()
+const Person = require('./models/person')
+
 morgan.token('person-info', (req) => {
   if (req.method === 'POST') {
     const body = JSON.stringify(req.body)
@@ -54,26 +57,18 @@ app.get('/info', (req, res) => {
 
 // For looking at all the persons
 
-app.get('/api/persons', (req, res) => {
-  res.json(persons)
-  console.log(persons)
+app.get('/api/persons', (request, response) => {
+  Person.find({}).then(persons => {
+    response.json(persons)
+  })
 })
 
 // For looking for a specific person
 
-app.get('/api/persons/:id', (req, res) => {
-  const id = Number(req.params.id)
-  const person = persons.find(person => {
-    console.log(person.id, typeof person.id, id, typeof id, person.id === id)
-    return person.id === id
+app.get('/api/persons/:id', (request, response) => {
+  Person.findById(request.params.id).then(person => {
+    response.json(person)
   })
-  console.log(person)
-
-  if (person) {
-    res.json(person)
-  } else {
-    res.status(404).end()
-  }
 })
 
 // For deleting a person
@@ -94,38 +89,67 @@ const generateId = () => {
   return maxId + 1;
 };
 
-app.post('/api/persons', (req, res) => {
-  const body = req.body
+// app.post('/api/persons', (request, response) => {
+//   const body = request.body
 
-  const person = {
-    id: generateId(),
-    name: body.name,
-    number: body.number
-  }
+//   if (body.name === undefined) {
+//     return response.status(400).json({ error: 'name missing' })
+//   }
+
+//   const person = new Person ({
+//     id: generateId(),
+//     name: body.name,
+//     number: body.number
+//   })
+
+//   person.save().then(savedPerson => {
+//     response.json(savedPerson)
+//   })
+
+
+//   if (!body.name || !body.number) {
+//     console.log('Name and number are required');
+//     return response.status(400).json({
+//       error: 'name and number are required'
+//     })
+//   }
+
+
+//   const NameExists = persons.some(person => person.name === body.name)
+
+//   if (NameExists) {
+//     console.log("name must be unique")
+//     return res.status(400).json({
+//       error: 'name must be unique'
+//     })
+//   }
+
+//   persons = persons.concat(person)
+//   res.json(person)
+//   console.log(person)
+// })
+
+app.post('/api/persons', (request, response) => {
+  const body = request.body;
 
   if (!body.name || !body.number) {
-    console.log('Name and number are required');
-    return res.status(400).json({
-      error: 'name and number are required'
-    })
+    return response.status(400).json({ error: 'name and number are required' });
   }
 
+  const person = new Person({
+    name: body.name,
+    number: body.number,
+  });
 
-  const NameExists = persons.some(person => person.name === body.name)
+  person.save().then(savedPerson => {
+    response.json(savedPerson);
+  }).catch(error => {
+    console.error('Error saving person:', error);
+    response.status(500).json({ error: 'Internal server error' });
+  });
+});
 
-  if (NameExists) {
-    console.log("name must be unique")
-    return res.status(400).json({
-      error: 'name must be unique'
-    })
-  }
-
-  persons = persons.concat(person)
-  res.json(person)
-  console.log(person)
-})
-
-const PORT = process.env.PORT || 3001
+const PORT = process.env.PORT
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
