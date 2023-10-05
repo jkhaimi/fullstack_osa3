@@ -34,19 +34,21 @@ const person = new Person({
 })
 
 if (person.name && person.number) {
-  person.save().then(result => {
+  person.save().then(() => {
     console.log(`added ${person.name} with number ${person.number} to phonebook`)
     mongoose.connection.close()
-  })}
-  else {
-      Person.find({}).then(result => {
-        console.log("Phonebook:");
-        result.forEach(person => {
-          console.log(person.name + " " + person.number);
-          mongoose.connection.close()
-        });
-      })
-    }
+  })
+}
+
+else {
+  Person.find({}).then(result => {
+    console.log('Phonebook:')
+    result.forEach(person => {
+      console.log(person.name + ' ' + person.number)
+      mongoose.connection.close()
+    })
+  })
+}
 
 personSchema.set('toJSON', {
   transform: (document, returnedObject) => {

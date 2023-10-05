@@ -18,7 +18,6 @@ app.use(cors())
 app.use(requestLogger)
 app.use(express.static('build'))
 
-let persons = []
 
 app.get('/info', (request, response) => {
   response.send('<h1>Hello World!</h1>')
@@ -30,9 +29,9 @@ app.get('/api/persons', (request, response, next) => {
       name: person.name,
       number: person.number,
       id: person._id,
-    })));
+    })))
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.get('/api/persons/:id', (request, response, next) => {
@@ -66,12 +65,12 @@ app.post('/api/persons', (request, response, next) => {
   person.save().then(savedPerson => {
     response.json(savedPerson)
   })
-  .catch(error => next(error))
+    .catch(error => next(error))
 })
 
 app.delete('/api/persons/:id', (request, response, next) => {
   Person.findByIdAndRemove(request.params.id)
-    .then(result => {
+    .then(() => {
       response.status(204).end()
     })
     .catch(error => next(error))
