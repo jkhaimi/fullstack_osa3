@@ -18,11 +18,18 @@ mongoose.connect(url)
     name: {
       type: String,
       required: true,
-      minlength: 3, 
+      minlength: 3,
     },
     number: {
-      type: Number, 
+      type: String, 
       required: true,
+      validate: {
+        validator: function (value) {
+
+          return /^[0-9]{2,3}-[0-9]+$/.test(value); 
+        },
+        message: 'Puhelinnumero ei ole oikeassa muodossa',
+      },
     },
   });
 
