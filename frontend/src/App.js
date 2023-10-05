@@ -120,11 +120,12 @@ const App = () => {
         })
         .catch((error) => {
           if (error.response || error.response.data || error.response.data.message) {
-            setErrorMessage(error.response.data);
+            setErrorMessage(error.response.data.error);
             console.log("kissa")
             console.log(error.response)
             console.log(error.response.data)
             console.log(error.response.message)
+            console.log(error.response.data.error)
             
           } else {
             console.log("mau")
