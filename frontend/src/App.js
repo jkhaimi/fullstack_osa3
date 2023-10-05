@@ -118,9 +118,12 @@ const App = () => {
           setNewName('');
           setNewNumber('');
         })
-        .catch(error => {
-          console.log(error.response.data.message)
-          setErrorMessage(`The name is shorter than the minimum allowwed length (3)`);
+        .catch((error) => {
+          if (error.response && error.response.data && error.response.data.message) {
+            setErrorMessage(error.response.data.message);
+          } else {
+            setErrorMessage("An error occurred while processing your request.");
+          }
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
