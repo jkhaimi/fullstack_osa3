@@ -105,7 +105,6 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage(null);
       }, 3000);
-
       // Nimi lisätään onnistuneesti
     } else {
       personService
@@ -120,7 +119,8 @@ const App = () => {
           setNewNumber('');
         })
         .catch((error) => {
-          setErrorMessage(error.response.data);
+          console.log(error.response.data)
+          setErrorMessage(`${error.response.data}`);
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
