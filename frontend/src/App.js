@@ -97,13 +97,16 @@ const App = () => {
             });
         }
       }}
-      
+
+      // Nimi tai numero puuttuu
    else {
     if (!newName || !newNumber) {
       setErrorMessage("Name and number are required");
       setTimeout(() => {
         setErrorMessage(null);
       }, 3000);
+
+      // Nimi lisätään onnistuneesti
     } else {
       personService
         .addPerson(newPerson)
@@ -117,7 +120,8 @@ const App = () => {
           setNewNumber('');
         })
         .catch((error) => {
-          setErrorMessage("The person could not be added");
+          console.log(error.response.data)
+          setErrorMessage(error.response.data);
           setTimeout(() => {
             setErrorMessage(null);
           }, 3000);
